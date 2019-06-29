@@ -1,0 +1,15 @@
+{
+  "name": "fileserve",
+  "version": "1.0.0",
+  "description": "large file serving",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "file",
+    "serving"
+  ],
+  "author": "S Durbridge",
+  "license": "MIT"
+}

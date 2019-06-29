@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Coding Train: Data/APIs 1</title>
+  </head>
+  <body>
+    <h1>Fetch a Rainbow</h1>
+    <img src="" id="rainbow" width="480" />
+    <br>
+    <p id="poem"/>
+    <br>
+    <img src="" id="rainbow2" width="480" />
+    <img src="" id="rainbow3" width="480" />
+    <img src="" id="rainbow4" width="480" />
+    <script>
+    const filenames = [
+    'image/rainbow2.jpg',
+    'image/rainbow3.jpg',
+    'image/rainbow4.jpg'
+    ];
+
+      console.log('about to fetch a rainbow');
+      catchRainbow()
+        .then(response => {
+          console.log('yay');
+          console.log(response);
+        })
+        .catch(error => {
+          console.log('error!');
+          console.error(error);
+        });
+
+      console.log('about to fetch the poem');
+      catchPoem()
+        .then(poem => {
+            console.log('got poem');
+            console.log(poem);
+            document.getElementById('poem').innerText = poem;
+        })
+        .catch(error => {
+            console.log('error!');
+            console.error(error);
+        });
+
+      console.log('about to fetch a few rainbows');
+      catchManyRainbows()
+        .then(response => {
+            console.log('yay');
+            console.log(response);
+        })
+        .catch(error => {
+            console.log('error!');
+            console.error(error);
+        });
+
+      async function catchRainbow() {
+        const response = await fetch('rainbow.jpg');
+        const blob = await response.blob();
+        console.log(blob);
+        document.getElementById('rainbow').src = URL.createObjectURL(blob);
+      }
+
+      async function catchPoem() {
+        const response = await fetch('poem.txt');
+        text = await response.text();
+        console.log(text);
+        return text;
+      }
+
+      async function catchManyRainbows() {
+        for (let filename of filenames) {
+          const response = await fetch(filename);
+          const blob = await response.blob();
+          console.log(blob);
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(blob);
+          img.width = '200';
+          document.body.append(img);
+        }
+      }
+
+    </script>
+  </body>
+</html>
